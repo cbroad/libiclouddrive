@@ -1,0 +1,32 @@
+{
+    "author": {
+        "email": "carl.broadbent@gmail.com",
+        "name": "Carl Broadbent"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+        "@types/node": "^22.13.1",
+        "node-addon-api": "^7.0.0",
+        "node-gyp": "^11.0.0",
+        "rimraf": "^6.0.1",
+        "typescript": "^5.7.3"
+    },
+    "files": [
+        "*"
+    ],
+    "gypfile": true,
+    "main": "./build/js/index.js",
+    "name": "libiclouddrive",
+    "repository": "github:cbroad/libiclouddrive",
+    "scripts": {
+        "build": "npm run build:cc && npm run build:ts",
+        "build:cc": "node-gyp rebuild -j max",
+        "build:ts": "tsc",
+        "clean": "rimraf build node_modules package-lock.json",
+        "install": "npm run build",
+        "prepublishOnly": "npm run build"
+    },
+    "types": "./build/types/index.d.ts",
+    "version": "0.0.1"
+}
