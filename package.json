@@ -35,13 +35,12 @@
     "productName": "libiclouddrive",
     "repository": "github:cbroad/libiclouddrive",
     "scripts": {
-        "build": "npm run build:ts && npm run build:cc",
-        "build:cc": "node-gyp rebuild -j max",
-        "build:ts": "tsc",
-        "clean": "npm run unbuild ; rimraf node_modules package-lock.json",
+        "build": "npm run build:cc && npm run build:ts",
+        "build:cc": "npx node-gyp rebuild -j max",
+        "build:ts": "npx tsc",
+        "clean": "npm run unbuild ; npx rimraf node_modules package-lock.json",
         "install": "npm run build",
-        "prepublishOnly": "npm run build",
-        "unbuild": "node-gyp clean ; rimraf build"
+        "unbuild": "npx node-gyp clean ; npx rimraf build"
     },
     "types": "./build/types/index.d.ts",
     "version": "1.0.0"
