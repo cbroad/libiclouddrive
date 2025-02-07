@@ -38,9 +38,9 @@
         "build": "npm run build:cc && npm run build:ts",
         "build:cc": "node-gyp rebuild -j max",
         "build:ts": "tsc",
-        "clean": "rimraf build node_modules package-lock.json",
+        "clean": "npm run unbuild ; rimraf node_modules package-lock.json",
         "prepare": "npm run build",
-        "unbuild": "rimraf build"
+        "unbuild": "node-gyp clean ; rimraf build"
     },
     "types": "./build/types/index.d.ts",
     "version": "1.0.0"
