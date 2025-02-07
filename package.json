@@ -40,7 +40,7 @@
         "build:ts": "tsc",
         "clean": "npm run unbuild ; rimraf node_modules package-lock.json",
         "install": "npm run build",
-        "prepare": "npm run build",
+        "prepublishOnly": "npm run build",
         "unbuild": "node-gyp clean ; rimraf build"
     },
     "types": "./build/types/index.d.ts",
