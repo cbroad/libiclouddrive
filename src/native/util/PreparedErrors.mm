@@ -1,5 +1,7 @@
 #include <napi.h>
+
 #include "./HelperFunctions.h"
+
 #include "./PreparedErrors.h"
 
 using namespace LibICloudDrive;

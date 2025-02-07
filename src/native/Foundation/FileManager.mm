@@ -1,9 +1,9 @@
 #include <napi.h>
 
-
 #include "../async/BoolPromiseWorker.h"
 #include "../util/Debug.h"
 #include "../util/HelperFunctions.h"
+
 #include "./FileManager.h"
 
 using namespace LibICloudDrive;

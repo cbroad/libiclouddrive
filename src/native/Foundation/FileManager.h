@@ -1,5 +1,6 @@
 #ifndef __LIBICLOUDDRIVE_FOUNDATION_FILEMANAGER_H__
 #define __LIBICLOUDDRIVE_FOUNDATION_FILEMANAGER_H__
+
 #include <napi.h>
 
 namespace LibICloudDrive::Foundation

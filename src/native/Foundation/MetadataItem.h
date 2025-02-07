@@ -1,5 +1,6 @@
 #ifndef __LIBICLOUDDRIVE_FOUNDATION_METADATAITEM_H___
 #define __LIBICLOUDDRIVE_FOUNDATION_METADATAITEM_H___
+
 #include <napi.h>
 
 namespace LibICloudDrive::Foundation

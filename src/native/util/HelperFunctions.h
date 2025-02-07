@@ -1,9 +1,10 @@
 #ifndef __LIBICLOUDDRIVE_HELPERFUNCTIONS_H__
 #define __LIBICLOUDDRIVE_HELPERFUNCTIONS_H__
 
+#import <Foundation/Foundation.h>
+
 #include <concepts>
 
-#import <Foundation/Foundation.h>
 #include <napi.h>
 
 namespace LibICloudDrive

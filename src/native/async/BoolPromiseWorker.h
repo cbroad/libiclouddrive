@@ -2,10 +2,12 @@
 #define __LIBICLOUDDRIVE_BOOLPROMISEWORKER_H__
 
 #import <Foundation/Foundation.h>
+
 #include <napi.h>
 
 #include "../util/Debug.h"
 #include "../util/HelperFunctions.h"
+
 #include "./PromiseWorker.h"
 
 namespace LibICloudDrive
@@ -39,11 +41,11 @@ namespace LibICloudDrive
         struct Runnable
         {
             // Runnable() {
-            //     if( Debug::Logging ) { NSLog( @"NSObjectPromiseWorker::Runnable::Runnable()" ); }
+            //     if( Debug::Logging ) { NSLog( @"BoolPromiseWorker::Runnable::Runnable()" ); }
             // };
 
             virtual ~Runnable() {
-                // if( Debug::Logging ) { NSLog( @"NSObjectPromiseWorker::Runnable::~Runnable()" ); }
+                // if( Debug::Logging ) { NSLog( @"BoolPromiseWorker::Runnable::~Runnable()" ); }
             };
 
             virtual bool run();

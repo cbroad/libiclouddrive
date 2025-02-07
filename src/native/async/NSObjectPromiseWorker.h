@@ -2,10 +2,12 @@
 #define __LIBICLOUDDRIVE_NSOBJECTPROMISEWORKER_H__
 
 #import <Foundation/Foundation.h>
+
 #include <napi.h>
 
 #include "../util/Debug.h"
 #include "../util/HelperFunctions.h"
+
 #include "./PromiseWorker.h"
 
 namespace LibICloudDrive

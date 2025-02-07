@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
 #import <objc/runtime.h>
+
 #include <concepts>
 #include <exception>
 #include <iostream>
@@ -12,6 +13,7 @@
 #include <napi.h>
 
 #include "./Debug.h"
+
 #include "./HelperFunctions.h"
 
 using namespace LibICloudDrive;
