@@ -5,6 +5,7 @@ import Path from "path";
 import * as FileManager from "./FileManager";
 import * as MetadataItem from "./MetadataItem";
 import * as URL from "./URL";
+import { SUPPORTED } from "../Constants";
 
 const PROJECT_ROOT = Path.resolve(__dirname, "../../..");
 
@@ -14,8 +15,8 @@ export type RawFoundation = {
     URL: typeof URL;
 };
 
-export const RawFoundation: RawFoundation = process.platform === "darwin"
-    ? require(Path.resolve(PROJECT_ROOT, "build/Release/iclouddrive.node"))
+export const RawFoundation: RawFoundation = SUPPORTED
+    ? require(Path.resolve(PROJECT_ROOT, "build/Release/libiclouddrive.node"))
     : {
         FileManager,
         MetadataItem,
