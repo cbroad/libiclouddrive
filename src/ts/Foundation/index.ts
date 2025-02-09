@@ -16,7 +16,7 @@ export type RawFoundation = {
 };
 
 export const RawFoundation: RawFoundation = SUPPORTED
-    ? require(Path.resolve(PROJECT_ROOT, "build/Release/libiclouddrive.node"))
+    ? require(Path.resolve(PROJECT_ROOT, `dist/libiclouddrive-${process.arch}.node`))
     : {
         FileManager,
         MetadataItem,

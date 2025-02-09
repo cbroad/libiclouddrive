@@ -30,21 +30,22 @@
         "native"
     ],
     "license": "MIT",
-    "main": "./build/js/index.js",
+    "main": "./dist/js/index.js",
     "name": "libiclouddrive",
     "productName": "libiclouddrive",
     "repository": "github:cbroad/libiclouddrive",
     "scripts": {
         "build": "npm run build:cc && npm run build:ts",
-        "build:cc": "npx node-gyp rebuild -j max",
-        "Xbuild:cc": "npm run build:cc:x86_64",
-        "Xbuild:cc:arm64": "npm_config_arch=arm64 npx node-gyp rebuild -j max",
-        "Xbuild:cc:x86_64": "npm_config_arch=x86_64 npx node-gyp rebuild -j max",
+        "build:current": "mkdir dist ; npx node-gyp rebuild -j max ; node -p \"fs.renameSync('build/Release/libiclouddrive.node', 'dist/libiclouddrive-$(node -p 'process.arch').node')\" ; npx rimraf build",
+        "build:cc": "npm run build:cc:arm64 ; npm run build:cc:x86_64",
+        "build:cc:arm64": "mkdir dist ; npm_config_arch=arm64 npx node-gyp rebuild -j max ; node -p 'fs.renameSync(\"build/Release/libiclouddrive.node\", \"dist/libiclouddrive-arm64.node\")' ; npx rimraf build",
+        "build:cc:x86_64": "mkdir dist ; npm_config_arch=x86_64 npx node-gyp rebuild -j max ; node -p 'fs.renameSync(\"build/Release/libiclouddrive.node\", \"dist/libiclouddrive-x64.node\")' ; npx rimraf build",
         "build:ts": "npx tsc",
         "clean": "npm run unbuild ; npx rimraf node_modules package-lock.json",
-        "Xinstall": "npm run build",
-        "unbuild": "npx node-gyp clean ; npx rimraf build"
+        "install": "npm run build",
+        "unbuild": "npx node-gyp clean ; npx rimraf build dist",
+        "removeBuildLeftovers": "cd build ; npx rimraf node_modules Release binding.Makefile config.gypi gyp-mac-tool iclouddrive.target.mk Makefile"
     },
-    "types": "./build/types/index.d.ts",
+    "types": "./dist/types/index.d.ts",
     "version": "1.0.0"
 }

@@ -2,11 +2,11 @@
   "compilerOptions": {
     "allowJs": true,
     "declaration": true,
-    "declarationDir": "./build/types",
+    "declarationDir": "./dist/types",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "module": "CommonJS",
-    "outDir": "./build/js",
+    "outDir": "./dist/js",
     "rootDir": "./src/ts",
     "sourceMap": true,
     "skipLibCheck": true,
