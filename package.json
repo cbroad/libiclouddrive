@@ -42,7 +42,8 @@
         "build:cc:x86_64": "mkdir dist ; npm_config_arch=x86_64 npx node-gyp rebuild -j max ; node -p 'fs.renameSync(\"build/Release/libiclouddrive.node\", \"dist/libiclouddrive-x64.node\")' ; npx rimraf build",
         "build:ts": "npx tsc",
         "clean": "npm run unbuild ; npx rimraf node_modules package-lock.json",
-        "install": "npm run build",
+        "Xinstall": "npm run build",
+        "install": "echo",
         "unbuild": "npx node-gyp clean ; npx rimraf build dist"
     },
     "types": "./dist/types/index.d.ts",
