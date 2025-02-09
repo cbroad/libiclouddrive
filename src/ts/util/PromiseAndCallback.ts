@@ -1,15 +1,15 @@
 /**
- * @typedef {Function} CallbackFunction
+ * @typedef {Function} CallbackFunction<T>
  * 
  * @param {Error|string|undefined} err set if an error has occurred
- * @param {any} val return value
- * @returns {any} this value will be ignored
+ * @param {T} val return value
+ * @returns {void} this value will be ignored
  */
 
 /**
- * @typedef {Function} PromiseFunction
+ * @typedef {Function} PromiseFunction<T>
  * 
- * @returns {Promise<any>} return value from function
+ * @returns {Promise<T>} return value from function
  */
 
 
@@ -18,13 +18,13 @@
  * 
  * @property {any[]} args arguments for target function
  * @property {CallbackFunction} [callback] the promise from target function will be used to populate the function parameters
- * @property {PromiseFunction} target asynchronous function that being called.
+ * @property {PromiseFunction<T>} target asynchronous function that being called.
  */
 
-export type PACParams = {
+export type PACParams<T, U extends T> = {
     args: any[] | undefined;
-    callback?: (err?: Error | string | undefined, val?: any) => unknown;
-    target: (...args: any[]) => Promise<any>;
+    callback?: (err?: Error | string | undefined, val?: U) => unknown;
+    target: (...args: any[]) => Promise<T>;
 };
 
 
@@ -34,14 +34,14 @@ export type PACParams = {
  * @param {Object} params
  * 
  * @param {any[]} params.args arguments for target function
- * @param {PromiseFunction} params.target asynchronous function that being called.
- * @returns {Promise}
+ * @param {PromiseFunction<T>} params.target asynchronous function that being called.
+ * @returns {Promise<T>}
  */
 
-export function PromiseAndCallback(params: {
+export function PromiseAndCallback<T>(params: {
     args: any[] | undefined;
-    target: (...args: any[]) => Promise<any>;
-}): Promise<any>;
+    target: (...args: any[]) => Promise<T>;
+}): Promise<T>;
 
 /**
  * Makes a promised-based asynchronous function work as callback asynchronous function as well.
@@ -49,15 +49,15 @@ export function PromiseAndCallback(params: {
  * @param {Object} params
  * 
  * @param {any[]} params.args arguments for target function
- * @param {CallbackFunction} [params.callback] the promise from target function will be used to populate the function parameters
- * @param {PromiseFunction} params.target asynchronous function that being called.
- * @returns {undefined}
+ * @param {CallbackFunction<U extends T>} [params.callback] the promise from target function will be used to populate the function parameters
+ * @param {PromiseFunction<T>} params.target asynchronous function that being called.
+ * @returns {void}
  */
-export function PromiseAndCallback(params: {
+export function PromiseAndCallback<T, U extends T>(params: {
     args: any[] | undefined;
-    callback: (err?: Error | string | undefined, val?: any) => unknown;
-    target: (...args: any[]) => Promise<any>;
-}): undefined;
+    callback: (err?: Error | string | undefined, val?: U) => unknown;
+    target: (...args: any[]) => Promise<T>;
+}): void;
 
 /**
  * Makes a promised-based asynchronous function work as callback asynchronous function as well.
@@ -65,27 +65,32 @@ export function PromiseAndCallback(params: {
  * @param {Object} params
  * 
  * @param {any[]} params.args arguments for target function
- * @param {CallbackFunction} [params.callback] (optional) the promise from target function will be used to populate the function parameters
- * @param {PromiseFunction} params.target asynchronous function that being called.
- * @returns {Promise|undefined} if a callback is defined, undefined is returned, otherwise a promise will be returned.
+ * @param {CallbackFunction<U extends T>} [params.callback] (optional) the promise from target function will be used to populate the function parameters
+ * @param {PromiseFunction<T>} params.target asynchronous function that being called.
+ * @returns {Promise<T>|void} if a callback is defined, undefined is returned, otherwise a promise will be returned.
  */
 
-export function PromiseAndCallback(params: {
+export function PromiseAndCallback<T, U extends T>(params: {
     args: any[] | undefined;
-    callback?: (err?: Error | string | undefined, val?: any) => unknown;
-    target: (...args: any[]) => Promise<any>;
-}): Promise<any> | undefined;
-export function PromiseAndCallback(params: {
+    callback?: (err?: Error | string | undefined, val?: U) => void;
+    target: (...args: any[]) => Promise<T>;
+}): Promise<T> | void;
+
+export function PromiseAndCallback<T, U extends T>(params: {
     args: any[] | undefined;
-    callback?: (err?: Error | string | undefined, val?: any) => unknown;
-    target: (...args: any[]) => Promise<any>;
-}): Promise<any> | undefined {
-    const { args = [], callback, target, } = params;
-    if (callback == undefined) {
-        return target(...args)
-            .catch(async (errorMessage: string): Promise<void> => { throw new Error(errorMessage); });
+    callback?: (err?: Error | string | undefined, val?: U) => void;
+    target: (...args: any[]) => Promise<T>;
+}): Promise<T> | void {
+    const { args = [], target, } = params;
+    let { callback } = params;
+    let response: Promise<T> | undefined = undefined;
+    if (!callback) {
+        response = new Promise<T>((resolve, reject) => {
+            callback = (err: Error | string | undefined, val?: T) => err && reject(err) || resolve(val!);
+        });
     }
     target(...args)
-        .then((val: any | undefined) => callback!(undefined, val))
-        .catch((err: string | undefined) => callback(new Error(err), undefined));
+        .then((val: T) => callback!(undefined, val as U))
+        .catch(callback);
+    return response;
 }
