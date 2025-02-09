@@ -37,9 +37,12 @@
     "scripts": {
         "build": "npm run build:cc && npm run build:ts",
         "build:cc": "npx node-gyp rebuild -j max",
+        "Xbuild:cc": "npm run build:cc:x86_64",
+        "Xbuild:cc:arm64": "npm_config_arch=arm64 npx node-gyp rebuild -j max",
+        "Xbuild:cc:x86_64": "npm_config_arch=x86_64 npx node-gyp rebuild -j max",
         "build:ts": "npx tsc",
         "clean": "npm run unbuild ; npx rimraf node_modules package-lock.json",
-        "install": "npm run build",
+        "Xinstall": "npm run build",
         "unbuild": "npx node-gyp clean ; npx rimraf build"
     },
     "types": "./build/types/index.d.ts",
