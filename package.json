@@ -47,5 +47,5 @@
         "removeBuildLeftovers": "cd build ; npx rimraf node_modules Release binding.Makefile config.gypi gyp-mac-tool iclouddrive.target.mk Makefile"
     },
     "types": "./dist/types/index.d.ts",
-    "version": "1.0.0"
+    "version": "1.0.1"
 }
