@@ -43,8 +43,7 @@
         "build:ts": "npx tsc",
         "clean": "npm run unbuild ; npx rimraf node_modules package-lock.json",
         "Xinstall": "npm run build",
-        "install": "echo",
-        "postinstall": "node -e \"process.exit((!require('fs').existsSync('.git'))|0)\" || npx run build",
+        "install": "node -e \"process.exit((!require('fs').existsSync('.git'))|0)\" || npx run build",
         "unbuild": "npx node-gyp clean ; npx rimraf build dist"
     },
     "types": "./dist/types/index.d.ts",
